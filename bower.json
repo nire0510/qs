@@ -1,0 +1,25 @@
+{
+  "name": "qs",
+  "version": "0.0.1",
+  "description": "Query string parser",
+  "main": "src/qs.js",
+  "keywords": [
+    "query",
+    "string",
+    "javascript",
+    "web",
+    "parser"
+  ],
+  "authors": [
+    "Nir Elbaz"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/nire0510/qs",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
