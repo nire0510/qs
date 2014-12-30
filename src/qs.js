@@ -1,6 +1,3 @@
-/**
- * @param {string} [strUrl] Url to parse. If null than current url is taken
- */
 function QS (strUrl) {
   var qs = {
     /** @property  */
@@ -8,14 +5,21 @@ function QS (strUrl) {
     /** @property  */
     tokens: {},
     /**
-     * Checks if url contains specific query string
+     * Checks if url contains specific query string token's key
      * @name log
      */
     has: function (strKey) {
       return qs.tokens.hasOwnProperty(strKey);
     },
     /**
-     * Logs query strings dictionary
+     * Gets query string token's value
+     * @name get
+     */
+    get: function (strKey) {
+      return qs.tokens[strKey];
+    },
+    /**
+     * Logs all query string tokens
      * @name log
      */
     log: function () {
@@ -23,19 +27,15 @@ function QS (strUrl) {
     }
   }
 
-  // Parse URL:
-  function _parse () {
+  // Extracts all query string tokens from url:
+  function _init () {
     var re = /[?&](\w+)(?:=(\w+))?/g,
       match;
 
-    // Extract tokens:
     match = re.exec(qs.url);
     while (match !== null) {
-      var objValue = _cast(match[2] || null);
-      // Add to global qs object:
-      qs[match[1]] = objValue;
       // Register qs keys as object's properties:
-      qs.tokens[match[1]] = objValue;
+      qs.tokens[match[1]] = _cast(match[2] || null);
       match = re.exec(qs.url);
     }
 
@@ -71,7 +71,7 @@ function QS (strUrl) {
     }
   }
 
-  _parse();
+  _init();
 
   return qs;
 }
