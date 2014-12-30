@@ -24,21 +24,54 @@ function QS (strUrl) {
   }
 
   // Parse URL:
-  function parse () {
+  function _parse () {
     var re = /[?&](\w+)(?:=(\w+))?/g,
       match;
 
+    // Extract tokens:
     match = re.exec(qs.url);
     while (match !== null) {
+      var objValue = _cast(match[2] || null);
       // Add to global qs object:
-      qs[match[1]] = match[2] || null;
+      qs[match[1]] = objValue;
       // Register qs keys as object's properties:
-      qs.tokens[match[1]] = match[2] || null;
+      qs.tokens[match[1]] = objValue;
       match = re.exec(qs.url);
     }
-  };
 
-  parse();
+    // Cast values of tokens:
+    function _cast (objValue) {
+      // Null value:
+      if (objValue === null) {
+        return;
+      }
+
+      // Numeric value:
+      if (objValue.match(/\d+/)) {
+        return Number(objValue);
+      }
+
+      // Boolean value:
+      if (objValue.match(/true|false/)) {
+        return Boolean(objValue);
+      }
+
+      // Undefined:
+      if (objValue === 'undefined') {
+        return undefined;
+      }
+
+      // Null value:
+      if (objValue === 'null') {
+        return null;
+      }
+
+      // String value:
+      return objValue;
+    }
+  }
+
+  _parse();
 
   return qs;
 }
