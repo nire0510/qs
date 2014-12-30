@@ -1,5 +1,5 @@
 function QS (strUrl) {
-  var qs = {
+  var _qs = {
     /** @property  */
     url: strUrl || window.location.href,
     /** @property  */
@@ -7,23 +7,35 @@ function QS (strUrl) {
     /**
      * Checks if url contains specific query string token's key
      * @name log
+     * @param {string} strKey Query string token's key to search
+     * @returns {boolean} True if key exists, false otherwise
      */
     has: function (strKey) {
-      return qs.tokens.hasOwnProperty(strKey);
+      return _qs.tokens.hasOwnProperty(strKey);
     },
     /**
      * Gets query string token's value
      * @name get
+     * @param {string} strKey Query string token's key to search
+     * @returns {object} Query string token's value if key exists, otherwise null
      */
     get: function (strKey) {
-      return qs.tokens[strKey];
+      return _qs.tokens[strKey];
     },
     /**
-     * Logs all query string tokens
+     * Gets all query string tokens object
+     * @name getAll
+     * @returns {*} Query string keys & values collection
+     */
+    getAll: function () {
+      return _qs.tokens;
+    },
+    /**
+     * Logs all query string tokens to browser's console
      * @name log
      */
     log: function () {
-      console.log(qs.tokens);
+      console.log(_qs.tokens);
     }
   }
 
@@ -32,11 +44,11 @@ function QS (strUrl) {
     var re = /[?&](\w+)(?:=(\w+))?/g,
       match;
 
-    match = re.exec(qs.url);
+    match = re.exec(_qs.url);
     while (match !== null) {
-      // Register qs keys as object's properties:
-      qs.tokens[match[1]] = _cast(match[2] || null);
-      match = re.exec(qs.url);
+      // Register _qs keys as object's properties:
+      _qs.tokens[match[1]] = _cast(match[2] || null);
+      match = re.exec(_qs.url);
     }
 
     // Cast values of tokens:
@@ -71,7 +83,9 @@ function QS (strUrl) {
     }
   }
 
+  // Initialize library:
   _init();
 
-  return qs;
+  // Reveal methods & properties:
+  return _qs;
 }
