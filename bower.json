@@ -14,11 +14,7 @@
     "Nir Elbaz"
   ],
   "ignore": [
-    ".gitignore",
-    "Gruntfile.js",
-    "karma.conf.js",
-    "test/**/*",
-    "node_modules/**/*"
+
   ],
   "license": "MIT",
   "homepage": "https://github.com/nire0510/qs",
@@ -27,6 +23,9 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
+    "tests",
+    "karma.conf.js",
+    "Gruntfile.js",
+    "package.json"
   ]
 }
