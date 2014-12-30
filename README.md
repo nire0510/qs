@@ -8,6 +8,6 @@ new QS('http://www.somedomain.com/somepage?foo=bar').foo
 // => 'bar'
 
 // Check if **foo** query string key exists:
-new QS('http://www.somedomain.com/somepage?foo=bar').foo
+new QS('http://www.somedomain.com/somepage?foo=bar').has('foo')
 // => true
 ```
