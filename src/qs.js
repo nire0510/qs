@@ -1,46 +1,71 @@
+/**
+ *
+ * @param strUrl {string} [strUrl] - Url to parse. If not specified then current URL is taken
+ * @returns {{url: String, tokens: {}, has: Function, get: Function, getAll: Function, log: Function}}
+ * @constructor
+ */
 function QS (strUrl) {
   var _qs = {
-    /** @property  */
+    /** @property {string} url - Url to parse */
     url: strUrl || window.location.href,
-    /** @property  */
+
+    /** @property {string} url - Query string tokens object */
     tokens: {},
+
     /**
      * Checks if url contains specific query string token's key
-     * @name log
-     * @param {string} strKey Query string token's key to search
+     * @name has
+     * @example
+     * // returns true
+     * QS('http://www.somedomain.com/somepage?foo=bar').has('foo');
+     * @param {string} strKey - Query string token's key to search
      * @returns {boolean} True if key exists, false otherwise
      */
     has: function (strKey) {
       return _qs.tokens.hasOwnProperty(strKey);
     },
+
     /**
      * Gets query string token's value
      * @name get
-     * @param {string} strKey Query string token's key to search
+     * @example
+     * // returns 'bar'
+     * QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
+     * @param {string} strKey - Query string token's key to search
      * @returns {object} Query string token's value if key exists, otherwise null
      */
     get: function (strKey) {
       return _qs.tokens[strKey];
     },
+
     /**
      * Gets all query string tokens object
      * @name getAll
+     * @example
+     * // returns {foo: "bar"}
+     * QS('http://www.somedomain.com/somepage?foo=bar').getAll();
      * @returns {*} Query string keys & values collection
      */
     getAll: function () {
       return _qs.tokens;
     },
+
     /**
      * Logs all query string tokens to browser's console
      * @name log
+     * @example
+     * QS('http://www.somedomain.com/somepage?foo=bar').log();
      */
     log: function () {
       console.log(_qs.tokens);
     }
-  }
+  };
 
-  // Extracts all query string tokens from url:
-  function _init () {
+  /**
+   * Extracts all query string tokens from url
+   * @constructs
+   */
+  (function _init () {
     var re = /[?&](\w+)(?:=(\w+))?/g,
       match;
 
@@ -81,10 +106,7 @@ function QS (strUrl) {
       // String value:
       return objValue;
     }
-  }
-
-  // Initialize library:
-  _init();
+  })();
 
   // Reveal methods & properties:
   return _qs;
