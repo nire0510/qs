@@ -1,6 +1,6 @@
 # QS - Simple query strings parser
 QS helps you extract all query string tokens from a given or current url.
-Version 0.2.8
+Version 0.2.9
 
 ### Code samples:
 ```javascript
