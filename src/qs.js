@@ -7,7 +7,7 @@
 function QS (strUrl) {
   var _qs = {
     /** @property {string} url - Url to parse */
-    url: strUrl || window.location.href,
+    url: strUrl || (window && window.location.href),
 
     /** @property {string} url - Query string tokens object */
     tokens: {},
@@ -48,6 +48,45 @@ function QS (strUrl) {
      */
     getAll: function () {
       return _qs.tokens;
+    },
+
+    /**
+     * Sets (update or insert) a query string token and then updates URL property
+     * @name set
+     * @param {string} strKey - Query string key name to set (update or insert)
+     * @param {object} objValue - Query string value
+     * @example
+     * QS('http://www.somedomain.com/somepage?foo=bar').set('dom', true);
+     * @returns QS (for chaining purposes)
+     */
+    set: function (strKey, objValue) {
+      _qs.tokens[strKey] = objValue || null;
+      _updateURL();
+      return _qs;
+    },
+
+    /**
+     * Removes a query string token from URL
+     * @name remove
+     * @param {string} strKey - Query string key name to remove
+     * @example
+     * QS('http://www.somedomain.com/somepage?foo=bar').remove('foo');
+     * @returns QS (for chaining purposes)
+     */
+    remove: function (strKey) {
+      delete _qs.tokens[strKey];
+      _updateURL();
+      return _qs;
+    },
+
+    /**
+     * Changes browser location to QS url (usually after manipulating query string tokens)
+     * @name go
+     * @example
+     * QS('http://www.somedomain.com/somepage?foo=bar').set('rob', 5).go();
+     */
+    go: function () {
+      document.location.href = _qs.url;
     },
 
     /**
@@ -107,6 +146,32 @@ function QS (strUrl) {
       return objValue;
     }
   })();
+
+  /**
+   * Update url property (usually after manipulating query string tokens)
+   * @name _updateURL
+   * @ignore
+   * @private
+   */
+  function _updateURL() {
+    var strUpdatedURL = _qs.url.substr(0, (_qs.url.indexOf('?') > 0 && _qs.url.indexOf('?')) || _qs.url.length),
+      arrTokens = [];
+
+    // Compose query strings:
+    for (var key in _qs.tokens) {
+      if (_qs.tokens.hasOwnProperty(key)) {
+        arrTokens.push(key + (_qs.tokens[key] ? '=' + _qs.tokens[key] : ''));
+      }
+    }
+
+    // Concat base url and query strings:
+    if (arrTokens.length > 0) {
+      strUpdatedURL += '?' + arrTokens.join('&');
+    }
+
+    // Update QS url property:
+    _qs.url = strUpdatedURL;
+  }
 
   // Reveal methods & properties:
   return _qs;
