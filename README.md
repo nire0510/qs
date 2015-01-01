@@ -53,3 +53,7 @@ QS('http://www.somedomain.com/somepage?foo=bar').remove('foo').set('bar').go();
 QS('http://www.somedomain.com/somepage?foo=bar').log();
 // => Object {foo: "bar"}
 ```
+
+### Installation:
+* Instal via bower: `bower install qs --save`
+Then add qs.min.js file to your website `<script src='bower_components/qs/dist/qs.min.js'></script>`

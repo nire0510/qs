@@ -4,7 +4,7 @@
  * @returns {{url: String, tokens: {}, has: Function, get: Function, getAll: Function, log: Function}}
  * @constructor
  */
-function QS (strUrl) {
+function QS(strUrl) {
   var _qs = {
     /** @property {string} url - Url to parse */
     url: strUrl || (window && window.location.href),
@@ -104,7 +104,7 @@ function QS (strUrl) {
    * Extracts all query string tokens from url
    * @constructs
    */
-  (function _init () {
+  (function _init() {
     var re = /[?&](\w+)(?:=(\w+))?/g,
       match;
 
@@ -116,7 +116,7 @@ function QS (strUrl) {
     }
 
     // Cast values of tokens:
-    function _cast (objValue) {
+    function _cast(objValue) {
       // Null value:
       if (objValue === null) {
         return;
