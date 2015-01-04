@@ -3,6 +3,10 @@ current version: Version 0.3.0
 QS helps you extract & manipulate all query string tokens from a given or current url: you can check if a specific query strink key exists, then check its value.
 You can also manipulate query string tokens by adding new ones, change values of existing tokens or removing them completely. After manipulation is done, just call `go()` to navigate to the modified URL.
 
+### Installation:
+* Instal via bower: `bower install qs --save`  
+Then add qs.min.js file to your website `<script src='bower_components/qs/dist/qs.min.js'></script>`
+
 ### Code samples:
 
 #### Read
@@ -53,7 +57,3 @@ QS('http://www.somedomain.com/somepage?foo=bar').remove('foo').set('bar').go();
 QS('http://www.somedomain.com/somepage?foo=bar').log();
 // => Object {foo: "bar"}
 ```
-
-### Installation:
-* Instal via bower: `bower install qs --save`  
-Then add qs.min.js file to your website `<script src='bower_components/qs/dist/qs.min.js'></script>`
