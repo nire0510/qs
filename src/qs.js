@@ -26,7 +26,7 @@ function QS(strUrl) {
     },
 
     /**
-     * Gets query string token's value
+     * Gets query string token's decoded value
      * @name get
      * @example
      * // returns 'bar'
@@ -35,7 +35,7 @@ function QS(strUrl) {
      * @returns {object} Query string token's value if key exists, otherwise null
      */
     get: function (strKey) {
-      return _qs.tokens[strKey];
+      return decodeURIComponent(_qs.tokens[strKey]);
     },
 
     /**
@@ -51,7 +51,7 @@ function QS(strUrl) {
     },
 
     /**
-     * Sets (update or insert) a query string token and then updates URL property
+     * Sets (update or insert) a query string token after encoding it and then updates URL property
      * @name set
      * @param {string} strKey - Query string key name to set (update or insert)
      * @param {object} objValue - Query string value
@@ -60,7 +60,7 @@ function QS(strUrl) {
      * @returns QS (for chaining purposes)
      */
     set: function (strKey, objValue) {
-      _qs.tokens[strKey] = objValue || null;
+      _qs.tokens[strKey] = encodeURIComponent(objValue) || null;
       _updateURL();
       return _qs;
     },

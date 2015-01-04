@@ -1,5 +1,4 @@
 # QS - Simple query string tokens parser
-current version: Version 0.3.0
 QS helps you extract & manipulate all query string tokens from a given or current url: you can check if a specific query strink key exists, then check its value.
 You can also manipulate query string tokens by adding new ones, change values of existing tokens or removing them completely. After manipulation is done, just call `go()` to navigate to the modified URL.
 
@@ -11,7 +10,7 @@ Then add qs.min.js file to your website `<script src='bower_components/qs/dist/q
 
 #### Read
 ```javascript
-// Get **foo** query string value from a given url:
+// Get **foo** query string decoded value from a given url:
 QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // => 'bar'
 
@@ -30,11 +29,11 @@ QS('http://www.somedomain.com/somepage?foo=bar').has('foo');
 
 #### Write
 ```javascript
-// Change the value of **foo** query string key:
+// Change and encode the value of **foo** query string key:
 QS('http://www.somedomain.com/somepage?foo=bar').set('foo', 2);
 // => url property will bechanged to "http://www.somedomain.com/somepage?foo=2"
 
-// Add a new query string token:
+// Add a new query string token and encode its value:
 QS('http://www.somedomain.com/somepage?foo=bar').set('dal', 'mon');
 // => url property will bechanged to "http://www.somedomain.com/somepage?foo=bar&dal=mon"
 
