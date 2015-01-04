@@ -3,8 +3,9 @@ QS helps you extract & manipulate all query string tokens from a given or curren
 You can also manipulate query string tokens by adding new ones, change values of existing tokens or removing them completely. After manipulation is done, just call `go()` to navigate to the modified URL.
 
 ### Installation:
-* Install via bower: `bower install qs --save`  
-Then add **qs.min.js** file to your website `<script src='bower_components/qs/dist/qs.min.js'></script>`
+* Install via bower: `bower install qs --save`
+Then add **qs.min.js** file to your website:  
+`<script src='bower_components/qs/dist/qs.min.js'></script>`
 
 ### Code samples:
 
