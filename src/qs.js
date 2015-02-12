@@ -35,7 +35,7 @@ function QS(strUrl) {
      * @returns {object} Query string token's value if key exists, otherwise null
      */
     get: function (strKey) {
-      return decodeURIComponent(_qs.tokens[strKey]);
+      return _qs.tokens[strKey] ? decodeURIComponent(_qs.tokens[strKey]) : undefined;
     },
 
     /**
@@ -60,7 +60,7 @@ function QS(strUrl) {
      * @returns QS (for chaining purposes)
      */
     set: function (strKey, objValue) {
-      _qs.tokens[strKey] = encodeURIComponent(objValue) || null;
+      _qs.tokens[strKey] = objValue ? encodeURIComponent(objValue) : null;
       _updateURL();
       return _qs;
     },
@@ -105,7 +105,7 @@ function QS(strUrl) {
    * @constructs
    */
   (function _init() {
-    var re = /[?&](\w+)(?:=(\w+))?/g,
+    var re = /[?&](\w+)(?:=([\w-]+))?/g,
       match;
 
     match = re.exec(_qs.url);
@@ -123,12 +123,12 @@ function QS(strUrl) {
       }
 
       // Numeric value:
-      if (objValue.match(/\d+/)) {
+      if (objValue.match(/^\d+$/)) {
         return Number(objValue);
       }
 
       // Boolean value:
-      if (objValue.match(/true|false/)) {
+      if (objValue.match(/^true|false$/)) {
         return Boolean(objValue);
       }
 

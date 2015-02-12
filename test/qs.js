@@ -47,6 +47,7 @@ describe("QS Library", function() {
   it("set function", function() {
     expect(QS(strURLNoQS).set('foo', 'bar').url).toEqual(strURLSingleQS);
     expect(QS(strURLSingleQS).set('nir', 'baz').url).toEqual(strURLMultipleQS);
+    debugger;
     expect(QS(strURLSingleQS).set('nir').url).toEqual(strURLMultipleAndValueOnlyQS);
     expect(QS(strURLMultipleQS).set('mon', 'ger').url).toEqual(strURLMultipleQS + '&mon=ger');
   });

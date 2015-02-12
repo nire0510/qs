@@ -36,6 +36,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-bump');
 
-  grunt.registerTask('default', ['bump', 'uglify']);
+  grunt.registerTask('default', ['uglify']);
 
 };
