@@ -123,7 +123,7 @@ function QS(strUrl) {
       }
 
       // Numeric value:
-      if (objValue.match(/^\d+$/)) {
+      if (!isNaN(objValue)) {
         return Number(objValue);
       }
 
