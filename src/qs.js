@@ -7,7 +7,7 @@
 function QS(strUrl) {
   var _qs = {
     /** @property {string} url - Url to parse */
-    url: strUrl || (window && window.location.href),
+    url: decodeURIComponent(strUrl || (window && window.location.href)),
 
     /** @property {string} url - Query string tokens object */
     tokens: {},
@@ -35,7 +35,7 @@ function QS(strUrl) {
      * @returns {object} Query string token's value if key exists, otherwise null
      */
     get: function (strKey) {
-      return _qs.tokens[strKey] ? decodeURIComponent(_qs.tokens[strKey]) : undefined;
+      return _qs.tokens[strKey];
     },
 
     /**
@@ -60,7 +60,7 @@ function QS(strUrl) {
      * @returns QS (for chaining purposes)
      */
     set: function (strKey, objValue) {
-      _qs.tokens[strKey] = objValue ? encodeURIComponent(objValue) : null;
+      _qs.tokens[strKey] = objValue;
       _updateURL();
       return _qs;
     },
@@ -86,7 +86,7 @@ function QS(strUrl) {
      * QS('http://www.somedomain.com/somepage?foo=bar').set('rob', 5).go();
      */
     go: function () {
-      document.location.href = _qs.url;
+      document.location.href = encodeURIComponent(_qs.url);
     },
 
     /**
@@ -114,38 +114,38 @@ function QS(strUrl) {
       _qs.tokens[match[1]] = _cast(match[2] || null);
       match = re.exec(_qs.url);
     }
-
-    // Cast values of tokens:
-    function _cast(objValue) {
-      // Null value:
-      if (objValue === null) {
-        return;
-      }
-
-      // Numeric value:
-      if (!isNaN(objValue)) {
-        return Number(objValue);
-      }
-
-      // Boolean value:
-      if (objValue.match(/^true|false$/)) {
-        return Boolean(objValue);
-      }
-
-      // Undefined:
-      if (objValue === 'undefined') {
-        return undefined;
-      }
-
-      // Null value:
-      if (objValue === 'null') {
-        return null;
-      }
-
-      // String value:
-      return objValue;
-    }
   })();
+
+  // Cast values of tokens:
+  function _cast(objValue) {
+    // Null value:
+    if (objValue === null) {
+      return;
+    }
+
+    // Numeric value:
+    if (!isNaN(objValue)) {
+      return Number(objValue);
+    }
+
+    // Boolean value:
+    if (objValue.match(/^true|false$/)) {
+      return Boolean(objValue);
+    }
+
+    // Undefined:
+    if (objValue === 'undefined') {
+      return undefined;
+    }
+
+    // Null value:
+    if (objValue === 'null') {
+      return null;
+    }
+
+    // String value:
+    return objValue;
+  }
 
   /**
    * Update url property (usually after manipulating query string tokens)
