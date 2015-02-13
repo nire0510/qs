@@ -105,7 +105,7 @@ function QS(strUrl) {
    * @constructs
    */
   (function _init() {
-    var re = /[?&](\w+)(?:=([\w-]+))?/g,
+    var re = /[?&]([\w-~\._]+)(?:=([\w-~\._]+))?/g,
       match;
 
     match = re.exec(_qs.url);
