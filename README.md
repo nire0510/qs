@@ -15,6 +15,11 @@ Then add **qs.min.js** file to your website:
 QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // => 'bar'
 
+// Notice that URL should contain only valid characters, which means query string tokens should be encoded properly using encodeURIComponent.
+// QS will decode them for you once you request for these tokens:
+QS('http://www.somedomain.com/somepage?email=nire0510%40gmail.com').get('email');
+// => 'nire0510@gmail.com'
+
 // You can also omit the URL if you want QS to parse current VALID encoded page's URL:
 QS().get('someKey');
 // => whatever...
