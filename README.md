@@ -30,11 +30,11 @@ QS('http://www.somedomain.com/somepage?foo=bar').has('foo');
 
 #### Write
 ```javascript
-// Change and encode the value of **foo** query string key:
+// Change the value of **foo** query string key:
 QS('http://www.somedomain.com/somepage?foo=bar').set('foo', 2);
 // => url property will bechanged to "http://www.somedomain.com/somepage?foo=2"
 
-// Add a new query string token and encode its value:
+// Add a new query string token:
 QS('http://www.somedomain.com/somepage?foo=bar').set('dal', 'mon');
 // => url property will bechanged to "http://www.somedomain.com/somepage?foo=bar&dal=mon"
 

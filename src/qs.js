@@ -1,13 +1,13 @@
 /**
  *
- * @param strUrl {string} [strUrl] - Url to parse. If not specified then current URL is taken
+ * @param strUrl {string} [strUrl] - A valid encoded Url to parse. If not specified then current URL is taken
  * @returns {{url: String, tokens: {}, has: Function, get: Function, getAll: Function, log: Function}}
  * @constructor
  */
 function QS(strUrl) {
   var _qs = {
-    /** @property {string} url - Url to parse */
-    url: decodeURIComponent(strUrl || (window && window.location.href)),
+    /** @property {string} url - encoded Url to parse */
+    url: (strUrl || (window && window.location.href)),
 
     /** @property {string} url - Query string tokens object */
     tokens: {},
@@ -51,7 +51,7 @@ function QS(strUrl) {
     },
 
     /**
-     * Sets (update or insert) a query string token after encoding it and then updates URL property
+     * Sets (update or insert) a query string token and then updates URL property
      * @name set
      * @param {string} strKey - Query string key name to set (update or insert)
      * @param {object} objValue - Query string value
@@ -105,13 +105,13 @@ function QS(strUrl) {
    * @constructs
    */
   (function _init() {
-    var re = /[?&]([\w-~\._]+)(?:=([\w-~\._]+))?/g,
+    var re = /[?&]([\w-~\.\+_%]+)(?:=([\w-~\.\+_%]+))?/g,
       match;
 
     match = re.exec(_qs.url);
     while (match !== null) {
       // Register _qs keys as object's properties:
-      _qs.tokens[match[1]] = _cast(match[2] || null);
+      _qs.tokens[decodeURIComponent(match[1])] = _cast((match[2] && decodeURIComponent(match[2])) || null);
       match = re.exec(_qs.url);
     }
   })();

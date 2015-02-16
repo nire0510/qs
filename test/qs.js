@@ -2,6 +2,7 @@ describe("QS Library", function() {
   var strURLNoQS = 'http://www.site.com',
     strURLSingleQS = strURLNoQS + '?foo=bar',
     strURLMultipleQS = strURLNoQS + '?foo=bar&nir=baz',
+    strURLWithSpecialCharactersQS = strURLNoQS + '?email=nire0510%40gmail.com',
     strURLMultipleAndValueOnlyQS = strURLNoQS + '?foo=bar&nir';
 
   it("QS object", function() {
@@ -30,8 +31,9 @@ describe("QS Library", function() {
     expect(QS(strURLSingleQS).get('foo')).toEqual('bar');
     expect(QS(strURLMultipleQS).get('foo')).toEqual('bar');
     expect(QS(strURLMultipleQS).get('nir')).toEqual('baz');
-    debugger;
+    expect(QS(strURLWithSpecialCharactersQS).get('email')).toEqual('nire0510@gmail.com');
     expect(QS(strURLNoQS).set('num', 345).get('num')).toEqual(345);
+    expect(QS(strURLNoQS).set('num', 345.56).get('num')).toEqual(345.56);
   });
 
   it("getAll function", function() {

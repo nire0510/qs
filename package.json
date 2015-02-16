@@ -1,6 +1,6 @@
 {
   "name": "qs",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Simple query strings parser",
   "main": "src/qs.js",
   "directories": {
