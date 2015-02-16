@@ -1,5 +1,5 @@
 # QS - Simple query string tokens parser
-QS helps you extract & manipulate all query string tokens from a given or current url: you can check if a specific query strink key exists, then check its value.
+QS helps you extract & manipulate all query string tokens from a given or current VALID encoded url: you can check if a specific query string key exists, then check its value.
 You can also manipulate query string tokens by adding new ones, change values of existing tokens or removing them completely. After manipulation is done, just call `go()` to navigate to the modified URL.
 
 ### Installation:
@@ -11,15 +11,15 @@ Then add **qs.min.js** file to your website:
 
 #### Read
 ```javascript
-// Get **foo** query string decoded value from a given url:
+// Get **foo** query string decoded value from a given VALID encoded url:
 QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // => 'bar'
 
-// You can also omit the URL if you want QS to parse current page's URL:
+// You can also omit the URL if you want QS to parse current VALID encoded page's URL:
 QS().get('someKey');
 // => whatever...
 
-// Get all query string tokens from a given url as an object:
+// Get all query string tokens from a given VALID encoded url as an object:
 QS('http://www.somedomain.com/somepage?foo=bar').getAll();
 // => Object {foo: "bar"}
 
