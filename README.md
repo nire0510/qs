@@ -11,7 +11,7 @@ Then add **qs.min.js** file to your website:
 
 #### Read
 ```javascript
-// Get **foo** query string decoded value from a given VALID encoded url:
+// Get **foo** query string decoded value from a given url (Notice that query string tokens should be encoded!):
 QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // => 'bar'
 
@@ -37,19 +37,19 @@ QS('http://www.somedomain.com/somepage?foo=bar').has('foo');
 ```javascript
 // Change the value of **foo** query string key:
 QS('http://www.somedomain.com/somepage?foo=bar').set('foo', 2);
-// => url property will bechanged to "http://www.somedomain.com/somepage?foo=2"
+// => url property will be changed to "http://www.somedomain.com/somepage?foo=2"
 
 // Add a new query string token:
 QS('http://www.somedomain.com/somepage?foo=bar').set('dal', 'mon');
-// => url property will bechanged to "http://www.somedomain.com/somepage?foo=bar&dal=mon"
+// => url property will be changed to "http://www.somedomain.com/somepage?foo=bar&dal=mon"
 
 // Remove a query string token:
 QS('http://www.somedomain.com/somepage?foo=bar').remove('foo');
-// => url property will bechanged to "http://www.somedomain.com/somepage"
+// => url property will be changed to "http://www.somedomain.com/somepage"
 
 // Notice set & remove methods can be chained:
 QS('http://www.somedomain.com/somepage?foo=bar').remove('foo').set('bar');
-// => url property will bechanged to "http://www.somedomain.com/somepage?bar"
+// => url property will be changed to "http://www.somedomain.com/somepage?bar"
 ```
 
 #### Misc
@@ -58,7 +58,11 @@ QS('http://www.somedomain.com/somepage?foo=bar').remove('foo').set('bar');
 QS('http://www.somedomain.com/somepage?foo=bar').remove('foo').set('bar').go();
 // => navigate to "http://www.somedomain.com/somepage?bar"
 
-// Log all qury string tokens:
+// Log all query string tokens:
 QS('http://www.somedomain.com/somepage?foo=bar').log();
 // => Object {foo: "bar"}
+
+// Print current version:
+QS().version;
+// => '0.3.6'
 ```

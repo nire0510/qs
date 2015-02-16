@@ -54,4 +54,8 @@ describe("QS Library", function() {
     expect(QS(strURLSingleQS).set('nir').url).toEqual(strURLMultipleAndValueOnlyQS);
     expect(QS(strURLMultipleQS).set('mon', 'ger').url).toEqual(strURLMultipleQS + '&mon=ger');
   });
+
+  it("version property", function() {
+    expect(QS().version).toEqual('0.3.6');
+  });
 });

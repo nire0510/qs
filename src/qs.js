@@ -6,7 +6,10 @@
  */
 function QS(strUrl) {
   var _qs = {
-    /** @property {string} url - encoded Url to parse */
+    /** @property {string} version - Current library version */
+    version: '0.3.6',
+
+    /** @property {string} url - Encoded Url to parse */
     url: (strUrl || (window && window.location.href)),
 
     /** @property {string} url - Query string tokens object */
@@ -111,7 +114,7 @@ function QS(strUrl) {
     match = re.exec(_qs.url);
     while (match !== null) {
       // Register _qs keys as object's properties:
-      _qs.tokens[decodeURIComponent(match[1])] = _cast((match[2] && decodeURIComponent(match[2])) || null);
+      _qs.tokens[decodeURIComponent(match[1])] = (_cast(match[2] && decodeURIComponent(match[2])) || null);
       match = re.exec(_qs.url);
     }
   })();
