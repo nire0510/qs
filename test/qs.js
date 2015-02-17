@@ -32,8 +32,13 @@ describe("QS Library", function() {
     expect(QS(strURLMultipleQS).get('foo')).toEqual('bar');
     expect(QS(strURLMultipleQS).get('nir')).toEqual('baz');
     expect(QS(strURLWithSpecialCharactersQS).get('email')).toEqual('nire0510@gmail.com');
+    // Check casting:
     expect(QS(strURLNoQS).set('num', 345).get('num')).toEqual(345);
     expect(QS(strURLNoQS).set('num', 345.56).get('num')).toEqual(345.56);
+    expect(QS(strURLNoQS).set('bool', true).get('bool')).toBeTruthy();
+    expect(QS(strURLNoQS).set('bool', false).get('bool')).toBeFalsy();
+    expect(QS(strURLNoQS).set('nullval', null).get('nullval')).toBeNull();
+    expect(QS(strURLNoQS).set('undefinedval', undefined).get('undefinedval')).toBeUndefined();
   });
 
   it("getAll function", function() {
@@ -56,6 +61,6 @@ describe("QS Library", function() {
   });
 
   it("version property", function() {
-    expect(QS().version).toEqual('0.3.6');
+    expect(QS().version).toEqual('0.3.7');
   });
 });

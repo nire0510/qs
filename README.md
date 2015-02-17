@@ -1,5 +1,5 @@
 # QS - Simple query string tokens parser
-QS helps you extract & manipulate all query string tokens from a given or current VALID encoded url: you can check if a specific query string key exists, then check its value.
+QS helps you extract & manipulate all query string tokens from a given or current valid url: you can check if a specific query string key exists, then check its value.
 You can also manipulate query string tokens by adding new ones, change values of existing tokens or removing them completely. After manipulation is done, just call `go()` to navigate to the modified URL.
 
 ### Installation:
@@ -11,7 +11,7 @@ Then add **qs.min.js** file to your website:
 
 #### Read
 ```javascript
-// Get **foo** query string decoded value from a given url (Notice that query string tokens should be encoded!):
+// Get **foo** query string decoded value from a given url:
 QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // => 'bar'
 
@@ -19,6 +19,8 @@ QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
 // QS will decode them for you once you request for these tokens:
 QS('http://www.somedomain.com/somepage?email=nire0510%40gmail.com').get('email');
 // => 'nire0510@gmail.com'
+QS('http://www.somedomain.com/somepage?number=345.678').get('number');
+// => 345.678 // Notice that you get a number, not a string
 
 // You can also omit the URL if you want QS to parse current VALID encoded page's URL:
 QS().get('someKey');
@@ -64,5 +66,5 @@ QS('http://www.somedomain.com/somepage?foo=bar').log();
 
 // Print current version:
 QS().version;
-// => '0.3.6'
+// => '0.3.7'
 ```

@@ -1,15 +1,15 @@
 /**
  *
- * @param strUrl {string} [strUrl] - A valid encoded Url to parse. If not specified then current URL is taken
+ * @param strUrl {string} [strUrl] - A valid Url to parse. If not specified then current URL is taken. Make sure that query string tokens are encoded (use encodeURIComponent)
  * @returns {{url: String, tokens: {}, has: Function, get: Function, getAll: Function, log: Function}}
  * @constructor
  */
 function QS(strUrl) {
   var _qs = {
     /** @property {string} version - Current library version */
-    version: '0.3.6',
+    version: '0.3.7',
 
-    /** @property {string} url - Encoded Url to parse */
+    /** @property {string} url - Url to parse */
     url: (strUrl || (window && window.location.href)),
 
     /** @property {string} url - Query string tokens object */
@@ -57,7 +57,7 @@ function QS(strUrl) {
      * Sets (update or insert) a query string token and then updates URL property
      * @name set
      * @param {string} strKey - Query string key name to set (update or insert)
-     * @param {object} objValue - Query string value
+     * @param {object} objValue - Query string value (plain, decoded)
      * @example
      * QS('http://www.somedomain.com/somepage?foo=bar').set('dom', true);
      * @returns QS (for chaining purposes)
@@ -89,7 +89,7 @@ function QS(strUrl) {
      * QS('http://www.somedomain.com/somepage?foo=bar').set('rob', 5).go();
      */
     go: function () {
-      document.location.href = encodeURIComponent(_qs.url);
+      document.location.href = _qs.url;
     },
 
     /**
@@ -108,7 +108,7 @@ function QS(strUrl) {
    * @constructs
    */
   (function _init() {
-    var re = /[?&]([\w-~\.\+_%]+)(?:=([\w-~\.\+_%]+))?/g,
+    var re = /[?&]([^=&#]+)(?:=([^&#]+))?/g,
       match;
 
     match = re.exec(_qs.url);
@@ -117,6 +117,9 @@ function QS(strUrl) {
       _qs.tokens[decodeURIComponent(match[1])] = (_cast(match[2] && decodeURIComponent(match[2])) || null);
       match = re.exec(_qs.url);
     }
+
+    // We update URL to apply encoded query string token, if user hasn't done it:
+    _updateURL();
   })();
 
   // Cast values of tokens:
@@ -157,23 +160,24 @@ function QS(strUrl) {
    * @private
    */
   function _updateURL() {
-    var strUpdatedURL = _qs.url.substr(0, (_qs.url.indexOf('?') > 0 && _qs.url.indexOf('?')) || _qs.url.length),
+    var strUpdatedUrl = '',
+      strBaseURL = _qs.url.substr(0, (_qs.url.indexOf('?') > 0 && _qs.url.indexOf('?')) || _qs.url.length),
+      strHash = _qs.url.indexOf('#') > 0 && _qs.url.substr(_qs.url.indexOf('#'));
       arrTokens = [];
 
     // Compose query strings:
     for (var key in _qs.tokens) {
       if (_qs.tokens.hasOwnProperty(key)) {
-        arrTokens.push(key + (_qs.tokens[key] ? '=' + _qs.tokens[key] : ''));
+        arrTokens.push(encodeURIComponent(key) + (_qs.tokens[key] ? '=' + encodeURIComponent(_qs.tokens[key]) : ''));
       }
     }
 
-    // Concat base url and query strings:
-    if (arrTokens.length > 0) {
-      strUpdatedURL += '?' + arrTokens.join('&');
-    }
+    // Set updated url to base + qs + hash:
+    strUpdatedUrl = strBaseURL;
+    strUpdatedUrl += (arrTokens.length > 0 ? '?' + arrTokens.join('&') : '');
+    strUpdatedUrl += (strHash ? strHash : '');
 
-    // Update QS url property:
-    _qs.url = strUpdatedURL;
+    _qs.url = strUpdatedUrl;
   }
 
   // Reveal methods & properties:
