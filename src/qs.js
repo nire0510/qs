@@ -156,7 +156,7 @@ function QS(strUrl) {
     // Set updated url to base + qs + hash:
     strUpdatedUrl = strBaseURL;
     strUpdatedUrl += (arrTokens.length > 0 ? '?' + arrTokens.join('&') : '');
-    strUpdatedUrl += (strHash ? strHash : '');
+    strUpdatedUrl += (strHash & strHash.length > 0 ? strHash : '');
 
     _qs.url = strUpdatedUrl;
   }
@@ -177,7 +177,7 @@ function QS(strUrl) {
     }
 
     // We update URL to apply encoded query string token, if user hasn't done it:
-    //_updateURL();
+    _updateURL();
   })();
 
   // Reveal methods & properties:
