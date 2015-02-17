@@ -7,7 +7,7 @@
 function QS(strUrl) {
   var _qs = {
     /** @property {string} version - Current library version */
-    version: '0.3.7',
+    version: '0.3.8',
 
     /** @property {string} url - Url to parse */
     url: (strUrl || (window && window.location.href)),
@@ -172,7 +172,7 @@ function QS(strUrl) {
     match = re.exec(_qs.url);
     while (match !== null) {
       // Register _qs keys as object's properties:
-      _qs.tokens[decodeURIComponent(match[1])] = (_cast(match[2] && decodeURIComponent(match[2])) || null);
+      _qs.tokens[decodeURIComponent(match[1])] = match[2] ? _cast(decodeURIComponent(match[2])) : null;
       match = re.exec(_qs.url);
     }
 
