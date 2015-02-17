@@ -177,7 +177,7 @@ function QS(strUrl) {
     }
 
     // We update URL to apply encoded query string token, if user hasn't done it:
-    _updateURL();
+    //_updateURL();
   })();
 
   // Reveal methods & properties:
