@@ -156,7 +156,7 @@ function QS(strUrl) {
     // Set updated url to base + qs + hash:
     strUpdatedUrl = strBaseURL;
     strUpdatedUrl += (arrTokens.length > 0 ? '?' + arrTokens.join('&') : '');
-    strUpdatedUrl += (strHash & strHash.length > 0 ? strHash : '');
+    strUpdatedUrl += (strHash && strHash.length > 0 ? strHash : '');
 
     _qs.url = strUpdatedUrl;
   }
