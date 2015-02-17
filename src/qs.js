@@ -103,25 +103,6 @@ function QS(strUrl) {
     }
   };
 
-  /**
-   * Extracts all query string tokens from url
-   * @constructs
-   */
-  (function _init() {
-    var re = /[?&]([^=&#]+)(?:=([^&#]+))?/g,
-      match;
-
-    match = re.exec(_qs.url);
-    while (match !== null) {
-      // Register _qs keys as object's properties:
-      _qs.tokens[decodeURIComponent(match[1])] = (_cast(match[2] && decodeURIComponent(match[2])) || null);
-      match = re.exec(_qs.url);
-    }
-
-    // We update URL to apply encoded query string token, if user hasn't done it:
-    _updateURL();
-  })();
-
   // Cast values of tokens:
   function _cast(objValue) {
     // Null value:
@@ -179,6 +160,25 @@ function QS(strUrl) {
 
     _qs.url = strUpdatedUrl;
   }
+
+  /**
+   * Extracts all query string tokens from url
+   * @constructs
+   */
+  (function _init() {
+    var re = /[?&]([^=&#]+)(?:=([^&#]+))?/g,
+      match;
+
+    match = re.exec(_qs.url);
+    while (match !== null) {
+      // Register _qs keys as object's properties:
+      _qs.tokens[decodeURIComponent(match[1])] = (_cast(match[2] && decodeURIComponent(match[2])) || null);
+      match = re.exec(_qs.url);
+    }
+
+    // We update URL to apply encoded query string token, if user hasn't done it:
+    _updateURL();
+  })();
 
   // Reveal methods & properties:
   return _qs;
