@@ -65,6 +65,6 @@ QS('http://www.somedomain.com/somepage?foo=bar').log();
 // => Object {foo: "bar"}
 
 // Print current version:
-QS().version;
+QS.version;
 // => '0.3.8'
 ```
