@@ -7,7 +7,7 @@
 function QS(strUrl) {
   var _qs = {
     /** @property {string} version - Current library version */
-    version: '0.3.8',
+    version: QS.version,
 
     /** @property {string} url - Url to parse */
     url: (strUrl || (window && window.location.href)),
@@ -133,6 +133,8 @@ function QS(strUrl) {
     // String value:
     return objValue;
   }
+
+  QS.version = '0.3.8';
 
   /**
    * Update url property (usually after manipulating query string tokens)

@@ -61,6 +61,7 @@ describe("QS Library", function() {
   });
 
   it("version property", function() {
-    expect(QS().version).toEqual('0.3.7');
+    expect(QS().version).toEqual('0.3.8');
+    expect(QS.version).toEqual('0.3.8');
   });
 });
