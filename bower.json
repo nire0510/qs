@@ -1,6 +1,6 @@
 {
   "name": "qs",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "description": "Simple query string tokens parser",
   "main": "src/qs.js",
   "keywords": [

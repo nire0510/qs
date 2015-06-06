@@ -138,7 +138,7 @@ function QS(strUrl) {
     return objValue;
   }
 
-  QS.version = '0.3.8';
+  QS.version = '0.3.9';
 
   /**
    * Update url property (usually after manipulating query string tokens)
