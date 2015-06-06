@@ -116,8 +116,12 @@ function QS(strUrl) {
     }
 
     // Boolean value:
-    if (objValue.match(/^true|false$/)) {
-      return Boolean(objValue);
+    if (objValue === 'true') {
+      return true;
+    }
+
+    if (objValue === 'false') {
+      return false;
     }
 
     // Undefined:
