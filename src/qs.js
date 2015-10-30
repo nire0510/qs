@@ -111,7 +111,7 @@ function QS(strUrl) {
     }
 
     // Numeric value:
-    if (!isNaN(objValue)) {
+    if (!isNaN(objValue) && Number(objValue).toString() === objValue) {
       return Number(objValue);
     }
 
@@ -138,7 +138,7 @@ function QS(strUrl) {
     return objValue;
   }
 
-  QS.version = '0.3.9';
+  QS.version = '0.3.10';
 
   /**
    * Update url property (usually after manipulating query string tokens)
