@@ -1,6 +1,6 @@
 {
   "name": "QS",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Simple query string tokens parser",
   "main": "dist/qs.min.js",
   "directories": {
