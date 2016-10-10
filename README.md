@@ -70,5 +70,5 @@ QS('http://www.somedomain.com/somepage?foo=bar').log();
 
 // Print current version:
 QS.version;
-// => '0.3.10'
+// => '0.4.4'
 ```
