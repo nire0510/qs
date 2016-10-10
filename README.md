@@ -7,9 +7,9 @@ You can also manipulate query string tokens by adding new ones, change values of
 Then add **qs.min.js** file to your website:  
 `<script src="bower_components/qs/dist/qs.min.js"></script>`  
 
-* Install via **npm**: `npm install QS --save`  
+* Install via **npm**: `npm install qs-parser --save`  
 Then add reference to library:  
-`const QS = require('QS');`  
+`const QS = require('qs-parser');`  
 
 ### Code samples:
 
@@ -70,5 +70,5 @@ QS('http://www.somedomain.com/somepage?foo=bar').log();
 
 // Print current version:
 QS.version;
-// => '0.4.4'
+// => '0.4.5'
 ```

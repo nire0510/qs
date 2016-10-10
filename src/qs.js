@@ -157,7 +157,7 @@
       return objValue;
     }
 
-    QS.version = '0.4.4';
+    QS.version = '0.4.5';
 
     /**
      * Update url property (usually after manipulating query string tokens)
