@@ -29,7 +29,7 @@
       version: QS.version,
 
       /** @property {string} url - Url to parse */
-      url: (strUrl || (window && window.location.href)),
+      url: (strUrl || (typeof window !== 'undefined' && window.location.href) || ''),
 
       /** @property {string} url - Query string tokens object */
       tokens: {},
