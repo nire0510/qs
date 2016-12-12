@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="src/qs.js"></script>
+</head>
+<body>
+<script>
+  var strURL = 'http://foo.com?cars[]=BMW&cars[]=Audi';
+  console.log(window.QS(strURL).get('bar[]'));
+  strURL = window.QS(strURL).set('cars', [1, 2, 3]).url;
+  console.log(window.QS(strURL).get('cars[]'));
+</script>
+</body>
+</html>

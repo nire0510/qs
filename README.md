@@ -25,6 +25,9 @@ QS('http://www.somedomain.com/somepage?email=nire0510%40gmail.com').get('email')
 // => 'nire0510@gmail.com'
 QS('http://www.somedomain.com/somepage?number=345.678').get('number');
 // => 345.678 // Notice that you get a number, not a string
+// QS also knows how to parse arrays:
+QS('http://www.somedomain.com/somepage?cars%5B%5D=BMW&cars%5B%5D=Audi').get('cars[]');
+// => ['BMW', 'Audi'] // param name must end with [] if its an array
 
 // You can also omit the URL if you want QS to parse current VALID encoded page's URL:
 QS().get('someKey');
@@ -70,5 +73,5 @@ QS('http://www.somedomain.com/somepage?foo=bar').log();
 
 // Print current version:
 QS.version;
-// => '0.4.6'
+// => '0.4.7'
 ```

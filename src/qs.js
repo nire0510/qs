@@ -3,7 +3,7 @@
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module.
     define([], factory);
-  } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+  } else if (typeof module === 'object' && module.exports) {
     // Node. Does not work with strict CommonJS, but
     // only CommonJS-like environments that support module.exports,
     // like Node.
@@ -82,6 +82,12 @@
        * @returns QS (for chaining purposes)
        */
       set: function (strKey, objValue) {
+        // append [] to key if value is array:
+        if (Array.isArray(objValue) && !/\[\]$/.test(strKey)) {
+          console.warn('QS:', strKey, 'is an array and hence renamed to', strKey + '[]');
+          strKey += '[]';
+        }
+
         _qs.tokens[strKey] = objValue;
         _updateURL();
         return _qs;
@@ -157,7 +163,7 @@
       return objValue;
     }
 
-    QS.version = '0.4.6';
+    QS.version = '0.4.5';
 
     /**
      * Update url property (usually after manipulating query string tokens)
@@ -174,7 +180,15 @@
       // Compose query strings:
       for (var key in _qs.tokens) {
         if (_qs.tokens.hasOwnProperty(key)) {
-          arrTokens.push(encodeURIComponent(key) + (_qs.tokens[key] ? '=' + encodeURIComponent(_qs.tokens[key]) : ''));
+          // deal with array:
+          if (Array.isArray(_qs.tokens[key]) && _qs.tokens[key].length > 0) {
+            _qs.tokens[key].forEach(function (objValue) {
+              arrTokens.push(encodeURIComponent(key) + '=' + encodeURIComponent(objValue.toString()));
+            });
+          }
+          else {
+            arrTokens.push(encodeURIComponent(key) + (_qs.tokens[key] ? '=' + encodeURIComponent(_qs.tokens[key]) : ''));
+          }
         }
       }
 
@@ -192,12 +206,29 @@
      */
     (function _init() {
       var re = /[?&]([^=&#]+)(?:=([^&#]+))?/g,
+        prop,
         match;
 
       match = re.exec(_qs.url);
       while (match !== null) {
+        prop = decodeURIComponent(match[1]);
+
         // Register _qs keys as object's properties:
-        _qs.tokens[decodeURIComponent(match[1])] = match[2] ? _cast(decodeURIComponent(match[2])) : null;
+        // deal with qs array:
+        if (/\[\]$/.test(prop)) {
+          if (match[2]) {
+            if (prop in _qs.tokens) {
+              _qs.tokens[prop].push(_cast(decodeURIComponent(match[2])))
+            }
+            else {
+              _qs.tokens[prop] = [_cast(decodeURIComponent(match[2]))]
+            }
+          }
+        }
+        else {
+          _qs.tokens[decodeURIComponent(match[1])] = match[2] ? _cast(decodeURIComponent(match[2])) : null;
+        }
+
         match = re.exec(_qs.url);
       }
 

@@ -5,6 +5,7 @@ describe("QS Library", function() {
     strURLWithSpecialCharactersQS = strURLNoQS + '?email=nire0510%40gmail.com',
     strURLMultipleAndValueOnlyQS = strURLNoQS + '?foo=bar&nir';
     strURLWithFalseValue = strURLNoQS + '?flag=false';
+    strURLWithArray = strURLNoQS + '?cars[]=Audi&cars[]=BMW&cars[]=Opel';
 
   it("QS object", function() {
     expect(QS).toBeDefined();
@@ -25,6 +26,7 @@ describe("QS Library", function() {
     expect(QS(strURLSingleQS).has('foo')).toBeTruthy();
     expect(QS(strURLMultipleQS).has('foo')).toBeTruthy();
     expect(QS(strURLMultipleQS).has('nir')).toBeTruthy();
+    expect(QS(strURLWithArray).has('cars[]')).toBeTruthy();
   });
 
   it("get function", function() {
@@ -34,6 +36,7 @@ describe("QS Library", function() {
     expect(QS(strURLMultipleQS).get('nir')).toEqual('baz');
     expect(QS(strURLWithSpecialCharactersQS).get('email')).toEqual('nire0510@gmail.com');
     expect(QS(strURLWithFalseValue).get('flag')).toBeFalsy();
+    expect(QS(strURLWithArray).get('cars[]')).toEqual('["Audi", "BMW", "Opel"]');
     // Check casting:
     expect(QS(strURLNoQS).set('num', 345).get('num')).toEqual(345);
     expect(QS(strURLNoQS).set('num', 345.56).get('num')).toEqual(345.56);
@@ -63,7 +66,7 @@ describe("QS Library", function() {
   });
 
   it("version property", function() {
-    expect(QS().version).toEqual('0.4.6');
-    expect(QS.version).toEqual('0.4.6');
+    expect(QS().version).toEqual('0.4.7');
+    expect(QS.version).toEqual('0.4.7');
   });
 });
