@@ -54,10 +54,11 @@
        * // returns 'bar'
        * QS('http://www.somedomain.com/somepage?foo=bar').get('foo');
        * @param {string} strKey - Query string token's key to search
+       * @param {variant} varDefault - Default value in case query string is missing or empty
        * @returns {object} Query string token's value if key exists, otherwise null
        */
-      get: function (strKey) {
-        return _qs.tokens[strKey];
+      get: function (strKey, varDefault) {
+        return _qs.tokens[strKey] || varDefault;
       },
 
       /**
@@ -163,7 +164,7 @@
       return objValue;
     }
 
-    QS.version = '0.4.5';
+    QS.version = '0.4.8';
 
     /**
      * Update url property (usually after manipulating query string tokens)
