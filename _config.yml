@@ -1,0 +1,8 @@
+title: QS
+description: Simple query string tokens parser
+google_analytics: UA-59986680-1
+show_downloads: true
+theme: jekyll-theme-modernist
+
+gems:
+  - jekyll-mentions
